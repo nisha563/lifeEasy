@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="container-card">
+        <h2>Register User</h2>
+        <form class="form-container" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="input-div">
+                <mat-icon class="icons" aria-hidden="false" aria-label="email" fontIcon="person"></mat-icon>
+                <input class="inputCls" placeholder="User name" id="username" formControlName="username" type="text" required />
+            </div>
+            <div class="input-div">
+                <mat-icon class="icons" aria-hidden="false" aria-label="email" fontIcon="email"></mat-icon>
+                <input class="inputCls" placeholder="email" id="email" formControlName="email" type="email" required />
+            </div>
+            <div class="input-div">
+                <mat-icon class="icons" aria-hidden="false" aria-label="lock" fontIcon="lock"></mat-icon>
+                <input class="inputCls" placeholder="password" id="password" formControlName="password" type="password"
+                    required />
+            </div>
+             <div class="input-div">
+                <mat-icon class="icons" aria-hidden="false" aria-label="lock" fontIcon="lock"></mat-icon>
+                <input class="inputCls" placeholder="confirm password" id="confirmPassword" formControlName="confirmPassword" type="password"
+                    required />
+            </div>
+            <!-- <button matButton="elevated"  type="submit" [disabled]="!loginForm.valid">Login</button> -->
+            <button class="submitBtn" type="submit" [disabled]="!signupForm.valid">Signup</button>
+        </form>
+        <a class="signupBtn" button (click)="login()">Login to your account
+            <mat-icon class="icons" aria-hidden="false" aria-label="Example arrow right icon"
+                fontIcon="arrow_forward"></mat-icon>
+        </a>
+    </div>
+</div>

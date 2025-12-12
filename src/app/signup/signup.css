@@ -79,3 +79,8 @@
 .icons:hover {
     color: black;
 }
+
+.hasError {
+    color: red;
+    font-size: 10px;
+}

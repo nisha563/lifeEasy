@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import{MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { FormControl,FormBuilder,FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +9,8 @@ import { AuthService } from '../../service/auth-service';
  // standalone:true,
   imports: [ReactiveFormsModule,MatIconModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrl: './login.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login {
  loginForm: FormGroup;
@@ -28,7 +29,19 @@ export class Login {
  }
 
   onSubmit() {    console.log('Form submitted');
-    this.authService.logIn(this.loginForm.value.email, this.loginForm.value.password);
+    this.authService.logIn(this.loginForm.value.email, this.loginForm.value.password).then((userCredential) => {
+        // Signed in
+        console.log('User logged in successfully');
+        var user = userCredential.user;
+         this.router.navigateByUrl('/dashboard');
+        // ...
+      })
+      .catch((error) => {
+        console.error('Error logging in:', error);
+          this.authService.openDialog(error, "Error while doing Login");
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });;
     // Here you can handle the form submission logic, like sending data to a server
   }
 }

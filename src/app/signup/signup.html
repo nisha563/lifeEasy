@@ -5,28 +5,49 @@
         <form class="form-container" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="input-div">
                 <mat-icon class="icons" aria-hidden="false" aria-label="email" fontIcon="person"></mat-icon>
-                <input class="inputCls" placeholder="User name" id="username" formControlName="username" type="text" required />
+                <input class="inputCls" placeholder="User name" id="username" formControlName="username" type="text" />
+                <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+                    <span class="hasError" *ngIf="signupForm.get('username')?.hasError('required')">Username is required.</span>
+                </div>
             </div>
+
             <div class="input-div">
                 <mat-icon class="icons" aria-hidden="false" aria-label="email" fontIcon="email"></mat-icon>
-                <input class="inputCls" placeholder="email" id="email" formControlName="email" type="email" required />
+                <input class="inputCls" placeholder="email" id="email" formControlName="email" type="email" />
+                <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                    <span class="hasError" *ngIf="signupForm.get('email')?.hasError('required')">email is required.</span>
+                </div>
             </div>
+
             <div class="input-div">
                 <mat-icon class="icons" aria-hidden="false" aria-label="lock" fontIcon="lock"></mat-icon>
-                <input class="inputCls" placeholder="password" id="password" formControlName="password" type="password"
-                    required />
+                <input class="inputCls" placeholder="password" id="password" formControlName="password"
+                    type="password" />
+                <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                    <span class="hasError" *ngIf="signupForm.get('password')?.hasError('required')">password is required.</span>
+                    <span class="hasError" *ngIf="!signupForm.get('password')?.hasError('required')">password must contain combination of capital and small latter with sepcial charactor and number.</span>
+                </div>
             </div>
-             <div class="input-div">
+
+            <div class="input-div">
                 <mat-icon class="icons" aria-hidden="false" aria-label="lock" fontIcon="lock"></mat-icon>
-                <input class="inputCls" placeholder="confirm password" id="confirmPassword" formControlName="confirmPassword" type="password"
-                    required />
+                <input class="inputCls" placeholder="confirm password" id="confirmPassword"
+                    formControlName="confirmPassword" type="password" />
+                <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
+                    <span class="hasError" *ngIf="signupForm.get('confirmPassword')?.hasError('required')">confirmPassword is
+                        required.</span>
+                        
+                </div>
+                 <div *ngIf="signupForm.get('confirmPassword')?.value != signupForm.get('password')?.value">
+                <span  *ngIf="signupForm.get('confirmPassword')?.value != signupForm.get('password')?.value" class="text-danger">
+              Password and Confirm Password must match
+              </span>
+                 </div>
+        
             </div>
-            <!-- <button matButton="elevated"  type="submit" [disabled]="!loginForm.valid">Login</button> -->
+           
             <button class="submitBtn" type="submit" [disabled]="!signupForm.valid">Signup</button>
         </form>
-        <a class="signupBtn" button (click)="login()">Login to your account
-            <mat-icon class="icons" aria-hidden="false" aria-label="Example arrow right icon"
-                fontIcon="arrow_forward"></mat-icon>
-        </a>
+        <p class="para">Already have an account? <a routerLink="../login" class="link">Login</a></p>
     </div>
 </div>

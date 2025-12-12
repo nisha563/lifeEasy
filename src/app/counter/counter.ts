@@ -30,6 +30,7 @@ this.store.dispatch(decriment());
  reset(){
 this.store.dispatch(reset());
  }
+ 
  login(){
 console.log("login method");
 this.router.navigateByUrl('/login');
